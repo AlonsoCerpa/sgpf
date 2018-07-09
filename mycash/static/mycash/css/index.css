@@ -15,7 +15,7 @@ footer {
 }
 
 .carousel-inner img {
-    width: 85%;
+    width: 90%;
     margin: auto;
     max-height:400px;
 }
@@ -126,4 +126,9 @@ footer{
     width: 100%;
     text-align: center;
     padding: 10px 0px;
+}
+
+/* Description */
+.description{
+    color: black;
 }

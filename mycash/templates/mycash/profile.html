@@ -8,49 +8,50 @@
 
 {% block body %}
 <div class="col-sm-12">
-    <div class="col-sm-8">
-        <div class="table-profile">
-            <h2 align="center" class="text-success fa-2x">My Profile</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> Name </td>
-                        <td>{{ user.name }}</td>
-                    </tr>
-                    <tr>
-                        <td> Last Name </td>
-                        <td>{{ user.last_name }}</td>
-                    </tr>
-                    <tr>
-                        <td> Email </td>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <td> Nickname </td>
-                        <td>{{ user.nickname }}</td>
-                    </tr>
-                    <tr>
-                        <td> Phone </td>
-                        <td>{{ user.phone }}</td>
-                    </tr>
-                    <tr>
-                        <td> Description </td>
-                        <td>{{ user.description }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="{% url 'mycash:upd-user' user.id %}" class="btn btn-primary pull-left" role="button">Edit</a>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="image-profile">
-            <img src="{{ user.photo.url }}" class="img-rounded" alt="">
+    <div class="table-profile">
+        <h2 align="center" class="text-success fa-2x">My Profile</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> Name </td>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <td> Last Name </td>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td> Email </td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td> Nickname </td>
+                    <td>{{ user.nickname }}</td>
+                </tr>
+                <tr>
+                    <td> Phone </td>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                <tr>
+                    <td> Description </td>
+                    <td>{{ user.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <div class="pull-left" >
+                <a href="{% url 'mycash:upd-user' user.id %}" class="btn btn-primary" role="button">Edit</a>
+            </div>
+            <div class="pull-right">
+                <a href="{% url 'mycash:del-account' %}" class="btn btn-danger" role="button">Delete Account</a>
+            </div>
+          <div class="clearfix"></div>
         </div>
     </div>
 </div>

@@ -8,16 +8,36 @@
         [CRUD]
 -->
 
+
+<!-- {% block savings %}
+    <ul class="nav navbar-nav navbar-right horizontal">
+        <li>
+            <a>
+                <form method="post" class="form-inline" action="{% url 'mycash:add-cat' %}">
+                     {% csrf_token %}
+                    <input type="text" placeholder="New Category" id="category" class="button-color">
+                    <button type="submit" class="button-color" >Save</button>
+                </form>
+            </a>
+        </li>
+    </ul>
+{% endblock %} -->
+
 {% block body %}
 <div class="col-sm-12">
     <div class="login-form">
+        <h5 align="center" class="text-success fa-2x">{{ msg }}</h5>
         <form method="post">
             <h4 class="modal-title">Manage Expense</h4>
 
             {% csrf_token %}
             {% include 'mycash/form-template.html' %}
 
-            <input type="submit" class="btn btn-success btn-block btn-lg" value="Save">
+            <select name="template" class="form-control btn btn-success" onchange="this.form.submit()">
+                <option value="-">----------</option>
+                <option value="save">Save</option>
+                <option value="another">Save and add Another</option>
+            </select>
         </form>
     </div>
 </div>

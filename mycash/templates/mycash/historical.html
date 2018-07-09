@@ -27,7 +27,6 @@
             </tbody>
         </table>
 
-        <div id="current_date" class="text-center"><i onclick="update()">Today: </i></div>
         <div id="search_date">
             <form action="#" name="search" method="GET">
                 <div class="form-row">
@@ -56,15 +55,73 @@
                             });
                         </script>
                     </div>
-                    <div class="form-group col-md-3" url-endpoint="{% url 'mycash:historical-data' %}">
+                    <div class="form-group col-md-3">
                         <input type="button" class="btn btn-primary" value="search" onclick="my_date()"/>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-sm-6">
 
+
+    <div class="col-sm-6">
+        <div class="pull-left" >
+                <input type="button" class="btn btn-primary" value="&laquo;" id="tprev" onclick="tmonth_p()" />
+            </div>
+            <div class="pull-right">
+                <input type="button" class="btn btn-primary" value="&raquo;" id="tnext" onclick="tmonth_n()" />
+            </div>
+          <div class="clearfix"></div>
+
+        <h2 id="ttitles"></h2>
+        <table class="table">
+            <thead>
+                <tr id="trow0">  <th></th><th></th><th></th><th></th><th></th><th></th><th></th> </tr>
+            </thead>
+            <tbody>
+                <tr id="trow1">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+                <tr id="trow2">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+                <tr id="trow3">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+                <tr id="trow4">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+                <tr id="trow5">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+                <tr id="trow6">  <td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            </tbody>
+        </table>
+
+        <div id="tsearch_date">
+            <form action="#" name="tsearch" method="GET">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <select class="form-control" name="tsearch_month">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input class="date-own form-control" type="text" name="tsearch_year" maxlength="4" size="4"/>
+                        <script type="text/javascript">
+                            $('.date-own').datepicker({
+                                minViewMode: 2,
+                                format: 'yyyy'
+                            });
+                        </script>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input type="button" class="btn btn-primary" value="tsearch" onclick="tmy_date()"/>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

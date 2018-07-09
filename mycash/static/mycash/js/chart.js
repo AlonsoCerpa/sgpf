@@ -63,7 +63,7 @@ function setChart(){
                     'rgba(51, 255, 97, 1)',
                     'rgba(51, 255, 97, 1)',
                 ],
-                borderWidth: 1
+                borderWidth: 1,
             }]
         },
 

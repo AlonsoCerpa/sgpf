@@ -1,0 +1,25 @@
+{% extends 'mycash/base.html' %}
+{% block title %}Delete Account{% endblock %}
+
+<!--
+    ExpenseForm Created in the forms, this based on ModelForm, what it does is map the
+    fields with the attributes of the class, and thus save it, update it and
+    delete it.
+        [CRUD]
+-->
+
+{% block body %}
+<div class="col-sm-12">
+    <div class="login-form">
+        <h4 align="center" class="text-success fa-2x">{{ msg }}</h4>
+        <form method="post">
+            <h4 class="modal-title">Confirm Password!!</h4>
+
+            {% csrf_token %}
+            {% include 'mycash/form-template.html' %}
+
+            <input type="submit" class="btn btn-danger btn-block btn-lg" value="Delete">
+        </form>
+    </div>
+</div>
+{% endblock %}

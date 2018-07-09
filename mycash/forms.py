@@ -26,9 +26,9 @@ class MyUserForm(forms.ModelForm):
         fields = ['name', 'last_name', 'email', 'password']
 
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),           # name field of Class User
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),      # last_name field of Class User
-            'email': forms.TextInput(attrs={'class': 'form-control'}),          # email field of Class User
+            'name': forms.TextInput(attrs={'placeholder': 'Name', 'class': 'form-control'}),           # name field of Class User
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}),      # last_name field of Class User
+            'email': forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}),          # email field of Class User
         }
 
     def clean_email(self):
@@ -52,16 +52,15 @@ class MyUserForm(forms.ModelForm):
 class MyUserUpdateForm(UserChangeForm):
     class Meta:
         model = MyUser
-        fields = ['name', 'last_name', 'nickname', 'phone', 'description', 'photo', 'password']
+        fields = ['name', 'last_name', 'nickname', 'phone', 'description', 'password']
 
         # The fields present in the form
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),           # name field of Class User
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),      # last_name field of Class User
-            'nickname': forms.TextInput(attrs={'class': 'form-control'}),       # name field of Class User
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),          # phone field of Class User
+            'name': forms.TextInput(attrs={'placeholder': 'Name', 'class': 'form-control'}),           # name field of Class User
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}),      # last_name field of Class User
+            'nickname': forms.TextInput(attrs={'placeholder': 'Nickname', 'class': 'form-control'}),       # name field of Class User
+            'phone': forms.TextInput(attrs={'placeholder': 'Phone', 'class': 'form-control'}),          # phone field of Class User
             'description': forms.Textarea(attrs={'class': 'form-control', 'cols': 20, 'rows': 3}),
-            'photo': forms.FileInput(attrs={'class': 'form-control'}),  # phone field of Class User
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),          # phone field of Class User
         }
 
@@ -75,6 +74,13 @@ class SignInForm(forms.Form):
                                widget=(forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})))
 
 
+class DeleteForm(forms.Form):
+    password1 = forms.CharField(required=True, label='Password',
+                            widget=(forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})))
+    password2 = forms.CharField(required=True, label='Confirm Password',
+                            widget=(forms.PasswordInput(attrs={'placeholder': 'Password', 'class': 'form-control'})))
+
+
 # Class IncomeForm, Use to Create Model Income [Objects]
 class IncomeForm(forms.ModelForm):
     class Meta:
@@ -86,6 +92,7 @@ class IncomeForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),           # name field of Class Income
             'amount': forms.TextInput(attrs={'class': 'form-control'}),         # amount field of Class Income
             'date': DateInput(attrs={'class': 'form-control'}),         # amount field of Class Income
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, user, *args, **kwargs):
@@ -104,6 +111,7 @@ class ExpenseForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),           # name field of Class Expense
             'amount': forms.TextInput(attrs={'class': 'form-control'}),         # amount field of Class Expense
             'date': DateInput(attrs={'class': 'form-control'}),         # amount field of Class Income
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, user, *args, **kwargs):

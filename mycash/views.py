@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from .models import Income, Category, Expense, MyUser, Goal
 from .forms import IncomeForm, ExpenseForm, MyUserUpdateForm, MyUserForm, SignInForm,\
                     ExpenseUpdateForm, IncomeUpdateForm, CategoryForm, TechnicalRequestForm,\
-                    GoalForm
+                    GoalForm, DeleteForm
 
 from .sql import DB
 from datetime import datetime
@@ -242,12 +242,17 @@ class IncomeCreate(View):
     # process form data
     def post(self, request):
         form = self.form_class(request.user, request.POST)
+        template = request.POST.get('template')
 
         if form.is_valid():
             income = form.save(commit=False)
             income.user = request.user
             income.save()
-            return redirect('mycash:income')
+            if template == 'save':
+                return redirect('mycash:income')
+            else:
+                tfm = self.form_class(request.user, None)
+                return render(request, self.template_name, {'form': tfm, "msg": 'Added Successfully'})
 
         return render(request, self.template_name, {'form': form})
 
@@ -282,17 +287,23 @@ class ExpenseCreate(View):
     # display blank form
     def get(self, request):
         form = self.form_class(request.user, None)
+        form.category = Category.objects.filter(user_id=request.session['id'], name='Other')
         return render(request, self.template_name, {'form': form})
 
     # process form data
     def post(self, request):
         form = self.form_class(request.user, request.POST)
+        template = request.POST.get('template')
 
         if form.is_valid():
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
-            return redirect('mycash:expense')
+            if template == 'save':
+                return redirect('mycash:income')
+            else:
+                tfm = self.form_class(request.user, None)
+                return render(request, self.template_name, {'form': tfm, "msg": 'Added Successfully'})
 
         return render(request, self.template_name, {'form': form})
 
@@ -337,7 +348,7 @@ class CategoryCreate(View):
             if cnt == 0:
                 category.save()
 
-            return redirect('mycash:overview')
+            return redirect('mycash:add-expense')
 
         return render(request, self.template_name, {'form': form})
 
@@ -352,13 +363,6 @@ class CategoryUpdate(UpdateView):
 class CategoryDelete(DeleteView):
     model = Category
     success_url = reverse_lazy('mycash:overview')
-
-
-class MyUserDeleteView(View):
-    def get(self, request):
-        db = DB()
-        db.delete_account(request.session['id'])
-        return redirect('mycash:log-out')
 
 
 class TechnicalRequestCreate(View):
@@ -495,10 +499,6 @@ class ChartData(APIView):
 
     def get(self, request, format=None):
         id_us = request.session['id']
-        income_label = []
-        expense_label = []
-        income_amount = []
-        expense_amount = []
 
         nd = 7
         nm = 7
@@ -508,19 +508,12 @@ class ChartData(APIView):
         # Data per day on income and expenses to be visualized visually
         incomes = db.income_month(id_us, nm)
         expenses = db.expense_day(id_us, nd)
-        for inc in incomes:
-            income_label.append(str(inc[0]))
-            income_amount.append(float(inc[1]))
-
-        for exp in expenses:
-            expense_label.append(str(exp[0]))
-            expense_amount.append(float(exp[1]))
 
         data = {
-            "income_label": income_label,
-            "expense_label": expense_label,
-            "income_amount": income_amount,
-            "expense_amount": expense_amount,
+            "income_label": incomes[0],
+            "expense_label": expenses[0],
+            "income_amount": incomes[1],
+            "expense_amount": expenses[1],
         }
         return Response(data)
 
@@ -536,16 +529,16 @@ class HistoricalData(APIView):
     permission_classes = []
 
     def get(self, request, format=None):
-        # month = int(request.GET.get('search_month'))+1
-        # year = request.GET.get('search_year')
-        month = '7'
-        year = '2018'
         id_us = request.session['id']
 
-        days = Expense.objects.filter(user_id=id_us, date__year=year, date__month=month).annotate(day=Day('date')).values('day')\
-            .annotate(amount=Sum('amount'))
+        db = DB()
+        month = db.income_all_month(id_us)
+        over = db.expense_income_historical(id_us)
 
-        data = {"days": days}
+        data = {
+            "month": month,
+            "over": over,
+        }
         return Response(data)
 
 
@@ -553,3 +546,49 @@ class HistoricalData(APIView):
 class HistoricalView(View):
     def get(self, request):
         return render(request, 'mycash/historical.html')
+
+
+class CatCreate(View):
+    # process form data
+    def post(self, request):
+        value = request.POST.get('category')
+        user = MyUser.get(pk=request.session['id'])
+        print(value)
+        print(user)
+        # Category.create('Work', user).save()
+        return redirect('mycash:add-expense')
+
+
+class MyUserDeleteView(View):
+    form = DeleteForm()
+    template_name = 'mycash/confirm.html'
+
+    def get(self, request):
+        context = {'form': self.form}
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = DeleteForm(request.POST)
+        context = {}
+        if form.is_valid():
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+
+            if password1 == password2:
+                tmp = MyUser.objects.get(pk=request.session['id'])
+                user = authenticate(email=tmp.email, password=password1)
+
+                if user is not None:
+                    db = DB()
+                    db.delete_account(request.session['id'])
+
+                    logout(request)
+                    request.session.flush()
+
+                    redirect('mycash:sign-in')
+                else:
+                    context = {'form': self.form, 'msg': 'Error: Email - Password Invalid'}
+            else:
+                context = {'form': self.form, 'msg': 'Error: Password1 id different from Password2'}
+
+        return render(request, self.template_name, context)

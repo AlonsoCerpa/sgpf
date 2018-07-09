@@ -45,4 +45,6 @@ urlpatterns = [
     url(r'^pdf/', login_required(views.GeneratePDF.as_view()), name='pdf'),
     url(r'^historical/', login_required(views.HistoricalView.as_view()), name='historical'),
     url(r'^api/historical/data/', login_required(views.HistoricalData.as_view()), name='historical-data'),
+
+    url(r'^add-cat/', login_required(views.CatCreate.as_view()), name='add-cat'),
 ]

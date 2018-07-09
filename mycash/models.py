@@ -45,7 +45,6 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         RegexValidator(regex='^[0-9]*$', message='Nickname must be Numeric', code='invalid_phone')])        # user phone
 
     description = models.TextField(blank=True, null=True)
-    photo = models.ImageField(upload_to='profile', blank=True, default='profile/user.png')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

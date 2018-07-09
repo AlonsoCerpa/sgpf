@@ -24,7 +24,7 @@
 }
 
 .login-form .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .login-form .form-control, .login-form .btn {
     min-height: 40px;
@@ -123,4 +123,9 @@ footer{
     width: 100%;
     text-align: center;
     padding: 1% 0px;
+}
+
+/*      */
+.button-color{
+    color: black;
 }
