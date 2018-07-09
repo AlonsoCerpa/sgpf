@@ -348,7 +348,7 @@ class CategoryCreate(View):
             if cnt == 0:
                 category.save()
 
-            return redirect('mycash:add-expense')
+            return redirect('mycash:overview')
 
         return render(request, self.template_name, {'form': form})
 

@@ -8,20 +8,21 @@
         [CRUD]
 -->
 
-
-<!-- {% block savings %}
-    <ul class="nav navbar-nav navbar-right horizontal">
-        <li>
-            <a>
-                <form method="post" class="form-inline" action="{% url 'mycash:add-cat' %}">
-                     {% csrf_token %}
-                    <input type="text" placeholder="New Category" id="category" class="button-color">
-                    <button type="submit" class="button-color" >Save</button>
-                </form>
-            </a>
-        </li>
-    </ul>
-{% endblock %} -->
+{% comment %}
+    {% block savings %}
+        <ul class="nav navbar-nav navbar-right horizontal">
+            <li>
+                <a>
+                    <form method="post" class="form-inline" action="{% url 'mycash:add-cat' %}">
+                         {% csrf_token %}
+                        <input type="text" placeholder="New Category" id="category" class="button-color">
+                        <button type="submit" class="button-color" >Save</button>
+                    </form>
+                </a>
+            </li>
+        </ul>
+    {% endblock %}
+{% endcomment %}
 
 {% block body %}
 <div class="col-sm-12">
