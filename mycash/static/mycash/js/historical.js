@@ -324,6 +324,10 @@ function twrite_days() {
                 grid.style.color="#a0babc";
             }
 
+            if (search_income(tmy_day, tmy_month+1, tmy_year) == 1){
+                grid.style.backgroundColor="#b3ffda";
+            }
+
             if (search_expense(tmy_day, tmy_month+1, tmy_year) == 1){
                 grid.style.backgroundColor="#f0b19e";
             }

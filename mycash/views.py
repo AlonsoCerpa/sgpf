@@ -165,6 +165,7 @@ class GoalView(View):
 
 
 # Create Object Expense to Save in DataBase
+# Add Goal, 
 class GoalCreate(View):
     form_class = GoalForm
     template_name = 'mycash/manage-goal.html'
@@ -200,6 +201,7 @@ class GoalDelete(DeleteView):
 
 
 # List All Category for each User   [ID]
+# Show all categories, will be used to add incomes or expense,
 class CategoryIndexView(generic.ListView):
     template_name = 'mycash/overview.html'
     context_object_name = 'all_categories'
@@ -218,6 +220,7 @@ class CategoryIndexView(generic.ListView):
 
 
 # Show Income - Expense for each User[ID]
+# All expense and income by category, 
 class CategoryDetailView(generic.DetailView):
     model = Category
     template_name = 'mycash/detail.html'
@@ -258,6 +261,7 @@ class IncomeCreate(View):
 
 
 # Create Object Income to Update in DataBase
+# Update a exist income with Django Framework
 class IncomeUpdate(UpdateView):
     model = Income
     form_class = IncomeUpdateForm
@@ -267,6 +271,8 @@ class IncomeUpdate(UpdateView):
         return reverse('mycash:income')
 
 
+# Delete a record of Income, save this change in the DB my cash
+# Django Framework
 class IncomeDelete(DeleteView):
     model = Income
     success_url = reverse_lazy('mycash:income')
@@ -308,7 +314,8 @@ class ExpenseCreate(View):
         return render(request, self.template_name, {'form': form, "msg": "Add Expense"})
 
 
-# Create Object Income to Update in DataBase
+# Update Expense Record, get record from DB and show
+# it in a form to make a change per fields.
 class ExpenseUpdate(UpdateView):
     model = Expense
     form_class = ExpenseUpdateForm
@@ -318,6 +325,7 @@ class ExpenseUpdate(UpdateView):
         return reverse('mycash:expense')
 
 
+# Delete Expense Record, from each 
 class ExpenseDelete(DeleteView):
     model = Expense
     success_url = reverse_lazy('mycash:expense')
