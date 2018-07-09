@@ -31,7 +31,6 @@ pipenv==2018.7.1
 psycopg2==2.7.4
 pyasn1==0.1.9
 Pygments==2.1
-pygobject==3.20.0
 pyOpenSSL==0.15.1
 PyPDF2==1.26.0
 Pyste==0.9.10

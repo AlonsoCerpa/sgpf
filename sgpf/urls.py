@@ -20,6 +20,5 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),           # Default main view url "admin"
-    url(r'^mycash/', include('mycash.urls')),   # App urls
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^admin/', admin.site.urls),           
+    url(r'^mycash/', include('mycash.urls'))   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -147,11 +147,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'mycash/media')
-#MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mycash/media')
+MEDIA_URL = '/media/'
 #STATIC_URL = '/static/'
-#LOGIN_URL = '/mycash/sign-in/'
-#AUTH_USER_MODEL = 'mycash.MyUser'
+LOGIN_URL = '/mycash/sign-in/'
+AUTH_USER_MODEL = 'mycash.MyUser'
 
 
 # Simplified static file serving.
