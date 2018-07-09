@@ -74,12 +74,11 @@ class DB:
             td_exp = []
             for i in range(0, len(tdi[0])):
                 tdi[2].append(tdi[1][i]/30)
-                td_exp.append([])
 
             for i in range(0, len(tde[0])):
                 for j in range(0, len(tdi[0])):
                     if (tde[0][i])[:7] == tdi[0][j] and tdi[2][j] < tde[1][i]:
-                        td_exp[j].append(tde[0][i][8:])
+                        td_exp.append(tde[0][i])
                         break
 
             return td_exp

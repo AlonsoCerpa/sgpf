@@ -42,6 +42,8 @@ function calendar(){
             month = data.month
             over = data.over
 
+            console.log(over)
+
             header()
             theader()
 
@@ -80,24 +82,17 @@ function first_line() {
      }
 }
 
-function search_over(mn, yr){
-    var k = -1, t;
-    for(t=0; t<month[0].length; t++){
-        str = month[0][t];
-        m = parseInt(str.substring(5, 7));
-        y = parseInt(str.substring(0, 4));
-        if(y == yr && m == mn){
-            k = t;
-            break;
-        }
-    }
-    return k;
-}
-
-function inside(x, tm){
+function search_inside(td, tm, ty){
     var k = 0, i;
-    for(i=0; i<tm.length; i++){
-        if(x == tm[i]){
+    var tmd, tmm, tmy;
+    var str;
+    for(i=0; i<over.length; i++){
+        str = over[i];
+        tmy = parseInt(str.substring(0,4));
+        tmm = parseInt(str.substring(5,7));
+        tmd = parseInt(str.substring(8,10));
+
+        if(tmd==td && tmm==tm && tmy==ty){
             k = 1;
             break;
         }
@@ -122,13 +117,6 @@ function write_days() {
     my_month=day_month.getMonth()
     my_year=day_month.getFullYear()
 
-    var r = search_over(my_month+2, my_year);
-    var tmp = [];
-
-    if(r>=0){
-        tmp = over[r];
-    }
-
     for (i=1;i<7;i++){
         row=document.getElementById("row"+i);
         for (j=0;j<7;j++) {
@@ -150,7 +138,7 @@ function write_days() {
                 grid.style.color="#a0babc";
             }
 
-            if ((inside(my_day, tmp) == 1) && my_month == month_c){
+            if (search_inside(my_day, my_month+1, my_year) == 1){
                 grid.style.backgroundColor="#f0b19e";
             }
 
@@ -182,7 +170,7 @@ function month_n() {
     write_days()
 }
 
-function my_date() {
+function my_date(){
     my_year=document.search.search_year.value;
     list_months=document.search.search_month;
     options=list_months.options;
@@ -237,22 +225,14 @@ function twrite_days() {
         pr_week=6;
     }
 
-    daypr_month=tf_month.getDate()
-    prcelda=daypr_month-pr_week;
-    begin=tf_month.setDate(prcelda)
-    tday_month=new Date()
+    daypr_month = tf_month.getDate()
+    prcelda = daypr_month-pr_week;
+    begin = tf_month.setDate(prcelda)
+    tday_month = new Date()
     tday_month.setTime(begin);
 
     tmy_month=tday_month.getMonth()
     tmy_year=tday_month.getFullYear()
-
-    var r = search_over(tmy_month+2, tmy_year);
-    var tmp = [];
-
-    if(r>=0){
-        tmp = over[r];
-    }
-    console.log(tmp)
 
     for (i=1;i<7;i++){
         trow=document.getElementById("trow"+i);
@@ -268,14 +248,14 @@ function twrite_days() {
             grid.style.backgroundColor="white";
 
             if (j==0) {
-                grid.style.color="#f11445";
+                grid.style.color="#F9C5C5";
             }
 
             if (tmy_month!=tmonth_cal) {
                 grid.style.color="#a0babc";
             }
 
-            if ((inside(tmy_day, tmp) == 1) && tmy_month == month_c){
+            if (search_inside(tmy_day, tmy_month+1, tmy_year) == 1){
                 grid.style.backgroundColor="#f0b19e";
             }
 
