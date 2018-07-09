@@ -203,7 +203,7 @@ class GoalDelete(DeleteView):
 class CategoryIndexView(generic.ListView):
     template_name = 'mycash/overview.html'
     context_object_name = 'all_categories'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
         return Category.objects.filter(user_id=self.request.session['id']).order_by('-name')
@@ -288,7 +288,7 @@ class ExpenseCreate(View):
     def get(self, request):
         form = self.form_class(request.user, None)
         form.category = Category.objects.filter(user_id=request.session['id'], name='Other')
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, "msg": "Add Expense"})
 
     # process form data
     def post(self, request):
@@ -305,7 +305,7 @@ class ExpenseCreate(View):
                 tfm = self.form_class(request.user, None)
                 return render(request, self.template_name, {'form': tfm, "msg": 'Added Successfully'})
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, "msg": "Add Expense"})
 
 
 # Create Object Income to Update in DataBase
@@ -390,7 +390,7 @@ class TechnicalRequestCreate(View):
 class ExpenseIndexView(generic.ListView):
     template_name = "mycash/expense.html"
     context_object_name = 'all_expense'
-    paginate_by = 6
+    paginate_by = 10
 
     def get_queryset(self):
         qname = self.request.GET.get("name")
@@ -427,7 +427,7 @@ class ExpenseIndexView(generic.ListView):
 class IncomeIndexView(generic.ListView):
     template_name = 'mycash/income.html'
     context_object_name = 'all_income'
-    paginate_by = 6
+    paginate_by = 10
 
     def get_queryset(self):
         qname = self.request.GET.get("name")
@@ -532,11 +532,15 @@ class HistoricalData(APIView):
         id_us = request.session['id']
 
         db = DB()
-        month = db.income_all_month(id_us)
+        inc = []
+
+        for it in Income.objects.filter(user_id=id_us):
+            inc.append(it.date)
+
         over = db.expense_income_historical(id_us)
 
         data = {
-            "month": month,
+            "inc": inc,
             "over": over,
         }
         return Response(data)

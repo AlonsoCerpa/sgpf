@@ -121,6 +121,6 @@ class Goal(models.Model):
     name = models.CharField(max_length=20, validators=[
         RegexValidator(regex='^[\w\s]*$', message='Name must be Alphanumeric', code='invalid_name'),
     ])
-    percentage = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0.00)])
+    percentage = models.DecimalField(max_digits=4, decimal_places=2, validators=[MinValueValidator(0.1)])
     adv_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     amount = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0.001)])

@@ -39,7 +39,7 @@ function calendar(){
         method: "GET",
         url: endpt,
         success: function(data){
-            month = data.month
+            inc = data.inc
             over = data.over
 
             console.log(over)
@@ -82,12 +82,30 @@ function first_line() {
      }
 }
 
-function search_inside(td, tm, ty){
+function search_expense(td, tm, ty){
     var k = 0, i;
     var tmd, tmm, tmy;
     var str;
     for(i=0; i<over.length; i++){
         str = over[i];
+        tmy = parseInt(str.substring(0,4));
+        tmm = parseInt(str.substring(5,7));
+        tmd = parseInt(str.substring(8,10));
+
+        if(tmd==td && tmm==tm && tmy==ty){
+            k = 1;
+            break;
+        }
+    }
+    return k;
+}
+
+function search_income(td, tm, ty){
+    var k = 0, i;
+    var tmd, tmm, tmy;
+    var str;
+    for(i=0; i<inc.length; i++){
+        str = inc[i];
         tmy = parseInt(str.substring(0,4));
         tmm = parseInt(str.substring(5,7));
         tmd = parseInt(str.substring(8,10));
@@ -138,7 +156,11 @@ function write_days() {
                 grid.style.color="#a0babc";
             }
 
-            if (search_inside(my_day, my_month+1, my_year) == 1){
+            if (search_income(my_day, my_month+1, my_year) == 1){
+                grid.style.backgroundColor="#b3ffda";
+            }
+
+            if (search_expense(my_day, my_month+1, my_year) == 1){
                 grid.style.backgroundColor="#f0b19e";
             }
 
@@ -248,14 +270,14 @@ function twrite_days() {
             grid.style.backgroundColor="white";
 
             if (j==0) {
-                grid.style.color="#F9C5C5";
+                grid.style.color="#f11445";
             }
 
             if (tmy_month!=tmonth_cal) {
                 grid.style.color="#a0babc";
             }
 
-            if (search_inside(tmy_day, tmy_month+1, tmy_year) == 1){
+            if (search_expense(tmy_day, tmy_month+1, tmy_year) == 1){
                 grid.style.backgroundColor="#f0b19e";
             }
 
