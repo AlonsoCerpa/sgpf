@@ -4,7 +4,32 @@
 {% block body %}
 <h2 align="center" class="text-success fa-2x">Incomes Total: {{ tincome.amount__sum }}</h2>
 
-<a href="{% url 'mycash:add-income' %}" class="btn btn-primary" role="button">Add Income</a>
+<div class="btn-group">
+    <a href="{% url 'mycash:add-income' %}" class="btn btn-primary" role="button">Add Income</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Income Data</button>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Income Data</h4>
+            </div>
+
+            <div class="modal-body">
+                <h5>Enetered Incomes</h5>
+                <p>List of all income, from the first to the last one entered, ordered by the date of entry</p>
+                <hr>
+                <h5>Search</h5>
+                <p>Functionality to search for an income by name, date or both, return those containing the text boxes.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <br><br>
 
 {% include "mycash/search.html" %}

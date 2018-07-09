@@ -9,6 +9,34 @@
             <a href="{% url 'mycash:add-expense' %}" class="btn btn-primary" role="button">Add Expense</a>
             <button onclick="return open_modal('{% url 'mycash:add-goal' %}')" type="button" class="btn btn-primary">Add Goal</button>
             <button onclick="return open_modal('{% url 'mycash:goal' %}')" type="button" class="btn btn-primary">Show Goals</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chart Inf.</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Graphics</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <h5>Income-Expense Chart</h5>
+                            <p>The graph of the left represents the Income for months, the X axis is the eses and the Y the amount won. </p>
+                            <hr>
+                            <h5>Incomes</h5>
+                            <p>The graph on the right, similar to the left, but this is given between days, since expenditures are given daily.</p>
+                            <hr>
+                            <h5>Expenses</h5>
+                            <p>You can change the type of graphic, it is still very static, but we are working on it. [d3.js]</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="pull-right">
