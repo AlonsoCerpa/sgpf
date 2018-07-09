@@ -46,6 +46,4 @@ virtualenv==16.0.0
 virtualenv-clone==0.3.0
 webencodings==0.5.1
 whitenoise==3.3.1
-wxPython==3.0.2.0
-wxPython-common==3.0.2.0
 xhtml2pdf==0.2.2
