@@ -1,0 +1,24 @@
+{% extends 'mycash/base.html' %}
+{% block title %}Send Technical Request{% endblock %}
+
+<!--
+    ExpenseForm Created in the forms, this based on ModelForm, what it does is map the
+    fields with the attributes of the class, and thus save it, update it and
+    delete it.
+        [CROUP]
+-->
+
+{% block body %}
+<div class="col-sm-12">
+    <div class="login-form">
+        <form method="post">
+            <h4 class="modal-title">Manage Expense</h4>
+
+            {% csrf_token %}
+            {% include 'mycash/form-template.html' %}
+
+            <input type="submit" class="btn btn-success btn-block btn-lg" value="Send">
+        </form>
+    </div>
+</div>
+{% endblock %}

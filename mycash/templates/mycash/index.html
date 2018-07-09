@@ -1,0 +1,67 @@
+<!--
+    Main view of the page, is the first thing we see when entering our website
+        Sign-In
+        Sign-Up
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load staticfiles %}
+    <link rel="icon" type="image/png" href="{% static 'mycash/images/favicon.png' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"	>
+    <link rel="stylesheet" href="{% static 'mycash/css/index.css'  %}" type="text/css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>MyCash</title>
+</head>
+
+<body>
+	<div class="container-full">
+
+		<!-- Nav -->
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<div class="container margin-left-nav">
+				<div class="row">
+					<div class="col-md-2">
+						<!-- Navbar brand (Brainiac) y botón colapsable -->
+						<div class="navbar-header">
+							<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+							<a class="navbar-brand" href="{% url 'mycash:index' %}">MyCash</a>
+						</div>
+					</div>
+
+					<div class="col-md-10">
+						<div class="navbar-collapse collapse" id="navbar-main">
+
+							<!-- Navbar botones -->
+                            <ul class="nav navbar-nav navbar-right horizontal">
+								<li><a href="{% url 'mycash:sign-in' %}"><i class="glyphicon glyphicon-log-in"></i>  Sign In</a></li>
+							</ul>
+                            <ul class="nav navbar-nav navbar-right horizontal">
+								<li><a href="{% url 'mycash:sign-up' %}"><i class="glyphicon glyphicon-user"></i>  Sign Up</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+    {% block body %}
+    {% endblock %}
+    <footer>
+      <p>MyCash [Cerpa - Mamani -Maldonado - Zevallos]</p>
+    </footer>
+</body>
+</html>

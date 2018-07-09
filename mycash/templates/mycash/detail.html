@@ -1,0 +1,88 @@
+{% extends 'mycash/base.html' %}
+{% block title %}Income/Expense Details{% endblock %}
+
+<!--
+    Detailed view of income and expenses by category,
+    shows all records both expenses and income.
+    For each record we are allowed to edit this data and enter data.
+-->
+
+{% block body %}
+    <h1 class="text-center text-success">{{ category.name }}</h1>
+
+    <div class="col-sm-12">
+        <!-- Income Details Table -->
+        <div class="col-sm-6">
+            <h2 class="text-center text-primary"><strong>Incomes</strong></h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th scope="col">Income</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </thead>
+                    <tbody>
+                        {% for income in category.income_set.all|dictsortreversed:"date"|slice:":8" %}
+                            <tr>
+                                <th>{{ forloop.counter }}</th>
+                                <td>{{ income.name }}</td>
+                                <td>{{ income.amount }}</td>
+                                <td>{{ income.date }}</td>
+                                <td><a href="{% url 'mycash:upd-income' income.id %}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td>
+                                    <form action="{% url 'mycash:del-income' income.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden", name="income_id" value="{{ income.id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Expense Details Table -->
+        <div class="col-sm-6">
+            <h2 class="text-center text-danger"><strong>Expenses</strong></h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th scope="col">Expense</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </thead>
+                    <tbody>
+                        {% for expense in category.expense_set.all|dictsortreversed:"date"|slice:":8" %}
+                            <tr>
+                                <th>{{ forloop.counter }}</th>
+                                <td>{{ expense.name }}</td>
+                                <td>{{ expense.amount }}</td>
+                                <td>{{ expense.date }}</td>
+                                <td><a href="{% url 'mycash:upd-expense' expense.id %}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td>
+                                    <form action="{% url 'mycash:del-expense' expense.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden", name="expense_id" value="{{ expense.id }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

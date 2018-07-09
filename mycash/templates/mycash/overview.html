@@ -1,0 +1,32 @@
+<!--
+    Main View once Initiated Session, resumes shown in graphics
+    Currently they are:
+        All Categories
+        Incomes / Expense Graphics
+-->
+{% extends 'mycash/base.html' %}
+
+{% block savings %}
+    <ul class="nav navbar-nav navbar-right horizontal">
+        <li><a><i class="fa fa-dollar"></i> Saving: {{ savings }}</a></li>
+    </ul>
+{% endblock %}
+
+{% block button %}
+    {% include "mycash/button.html" %}
+{% endblock %}
+
+<!-- Chart JS -->
+{% block jquery %}
+    typeChart()
+{% endblock %}
+
+<!-- Charts -->
+{% block chart %}
+    {% include "mycash/chart.html" %}
+{% endblock %}
+
+<!-- Categories -->
+{% block body %}
+    {% include "mycash/category.html" %}
+{% endblock %}

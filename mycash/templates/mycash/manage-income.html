@@ -1,0 +1,24 @@
+{% extends 'mycash/base.html' %}
+{% block title %}Manage Income{% endblock %}
+
+<!--
+    IncomeForm Created in the forms, this based on ModelForm, what it does is map the
+    fields with the attributes of the class, and thus save it, update it and
+    delete it.
+        [CRUD]
+-->
+
+{% block body %}
+<div class="col-sm-12">
+    <div class="login-form">
+        <form method="post">
+            <h4 class="modal-title">Manage Income</h4>
+
+            {% csrf_token %}
+            {% include 'mycash/form-template.html' %}
+
+            <input type="submit" class="btn btn-success btn-block btn-lg" value="Save">
+        </form>
+    </div>
+</div>
+{% endblock %}
