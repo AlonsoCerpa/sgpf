@@ -154,6 +154,3 @@ LOGIN_URL = '/mycash/sign-in/'
 AUTH_USER_MODEL = 'mycash.MyUser'
 
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
