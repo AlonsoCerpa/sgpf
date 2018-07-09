@@ -1,1 +1,1 @@
-web: gunicorn sgpf.wsgi
+web: gunicorn sgpf.wsgi --log-file -
