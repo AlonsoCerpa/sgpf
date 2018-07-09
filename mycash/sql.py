@@ -51,6 +51,14 @@ class DB:
             return fetch_to_list(incomes)
 
     @staticmethod
+    def expense_all_month(idu):
+        with connection.cursor() as cursor:
+            cursor.execute("select * from expense_all_month(%s)", [idu])
+
+            expenses = cursor.fetchall()
+            return fetch_to_list(expenses)
+
+    @staticmethod
     def expense_all_day(idu):
         with connection.cursor() as cursor:
             cursor.execute("select * from expense_all_day(%s)", [idu])

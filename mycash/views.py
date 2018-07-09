@@ -538,10 +538,14 @@ class HistoricalData(APIView):
             inc.append(it.date)
 
         over = db.expense_income_historical(id_us)
+        expense = db.expense_all_month(id_us)
+        income = db.income_all_month(id_us)
 
         data = {
             "inc": inc,
             "over": over,
+            "income": income,
+            "expense": expense,
         }
         return Response(data)
 

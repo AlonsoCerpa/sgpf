@@ -113,4 +113,22 @@ begin
 end;
 $$
 language 'plpgsql';
+
+
+create or replace function expense_all_month(id_us integer)
+	returns table(month text, amount numeric(9,2))
+as $$ 
+declare
+begin
+	return query 	
+	select 
+		to_char(exp.date, 'YYYY-MM') as month,
+		sum(exp.amount) as amount
+	from mycash_expense as exp
+	where exp.user_id = id_us
+	group by month
+	order by month;
+end;
+$$
+language 'plpgsql';
 */

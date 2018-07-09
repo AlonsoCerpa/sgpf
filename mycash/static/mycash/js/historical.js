@@ -13,6 +13,8 @@ function calendar(){
 
     //first
     titles=document.getElementById("titles");
+    expn=document.getElementById("exp");
+    incn=document.getElementById("inc");
     prev=document.getElementById("prev");
     next=document.getElementById("next");
 
@@ -20,6 +22,8 @@ function calendar(){
 
     // second
     ttitles=document.getElementById("ttitles");
+    texpn=document.getElementById("texp");
+    tincn=document.getElementById("tinc");
     tprev=document.getElementById("tprev");
     tnext=document.getElementById("tnext");
 
@@ -27,7 +31,7 @@ function calendar(){
 
     // first
     document.search.search_year.value=year_c;
-    month_cal = month_c;
+    month_cal = month_c-1;
     year_cal = year_c
 
     // second
@@ -41,6 +45,8 @@ function calendar(){
         success: function(data){
             inc = data.inc
             over = data.over
+            expense = data.expense
+            income = data.income
 
             console.log(over)
 
@@ -62,6 +68,8 @@ function calendar(){
 
 function header() {
     titles.innerHTML=months[month_cal]+", "+year_cal;
+    incn.innerHTML = "Income: "+find_income(month_cal+1, year_cal);
+    expn.innerHTML = "Expense: "+find_expense(month_cal+1, year_cal);
     month_prev=month_cal-1;
     month_next=month_cal+1;
     if (month_prev<0){
@@ -81,6 +89,42 @@ function first_line() {
         grid0.innerHTML=day_week[i]
      }
 }
+
+function find_income(tm, ty){
+    var h = "0", str;
+    var i;
+
+    for(i=0; i<income[0].length; i++){
+        str = income[0][i];
+        tmy = parseInt(str.substring(0,4));
+        tmm = parseInt(str.substring(5,7));
+        if(tmm==tm && tmy==ty){
+            h = income[1][i];
+            break;
+        }
+    }
+
+    return h;
+}
+
+
+function find_expense(tm, ty){
+    var h = "0", str;
+    var i;
+
+    for(i=0; i<expense[0].length; i++){
+        str = expense[0][i];
+        tmy = parseInt(str.substring(0,4));
+        tmm = parseInt(str.substring(5,7));
+        if(tmm==tm && tmy==ty){
+            h = expense[1][i];
+            break;
+        }
+    }
+
+    return h;
+}
+
 
 function search_expense(td, tm, ty){
     var k = 0, i;
@@ -218,6 +262,9 @@ function my_date(){
 // second!!
 function theader() {
     ttitles.innerHTML=months[tmonth_cal]+", "+tyear_cal;
+    tincn.innerHTML = "Income: "+find_income(tmonth_cal+1, tyear_cal);
+    texpn.innerHTML = "Expense: "+find_expense(tmonth_cal+1, tyear_cal);
+
     tmonth_prev=tmonth_cal-1;
     tmonth_next=tmonth_cal+1;
 
