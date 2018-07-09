@@ -15,9 +15,11 @@ footer {
 }
 
 .carousel-inner img {
-    width: 90%;
+    width: 70%; /*60%*/
     margin: auto;
-    max-height:400px;
+    /*max-height:500px;*/
+    min-height: 600px;
+    max-height: 600px;
 }
 
 /* Hide the carousel text when the screen is less than 600 pixels wide */
