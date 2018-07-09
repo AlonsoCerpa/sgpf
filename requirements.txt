@@ -33,7 +33,6 @@ pyasn1==0.1.9
 Pygments==2.1
 pyOpenSSL==0.15.1
 PyPDF2==1.26.0
-Pyste==0.9.10
 python-apt==1.1.0b1+ubuntu0.16.4.1
 pytz==2014.10
 reportlab==3.4.0
