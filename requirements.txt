@@ -9,7 +9,7 @@ dj-database-url==0.5.0
 Django==1.9
 django-account-helper==0.1.4
 django-preventconcurrentlogins==0.8.2
-djangorestframework==3.6.3
+djangorestframework==3.9.1
 docutils==0.12
 enum34==1.1.2
 futures==3.2.0
