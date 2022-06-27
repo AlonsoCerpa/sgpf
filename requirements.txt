@@ -33,7 +33,7 @@ Pygments==2.1
 pyOpenSSL==0.15.1
 PyPDF2==1.26.0
 pytz==2014.10
-reportlab==3.4.0
+reportlab==3.5.55
 requests==2.9.1
 roman==2.0.0
 singledispatch==3.4.0.3
